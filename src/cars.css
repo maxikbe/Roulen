@@ -15,6 +15,5 @@
     stroke: #b3b4c0;
     stroke-width: 0.5px;
     fill-rule: evenodd;
-    /* Applies the inner glow filter defined below */
     filter: url(#inner-glow);
 }
