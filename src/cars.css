@@ -1,20 +1,45 @@
-#Roulen-Hawk-m1 {
-    width: 100%;
+:root{
+    --Hawk-m1: rgba(133, 228, 218, 1);
+    --Hawk-m1-a: rgba(133, 228, 218, 0.5);
+    --Pig-m2: rgba(133, 228, 218, 1);
+    --Pig-m2-a: rgba(133, 228, 218, 0.5);
+}
+
+.Roulen-Car {
+    margin: 100px 10px;
+    width: 800px;
     height: auto;
-    filter: drop-shadow(0 0 15px #080a78) drop-shadow(0 10px 20px rgba(4, 27, 143, 0.555));
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-#Roulen-Hawk-m1:hover {
-    transform: scale(1.02);
-    filter: drop-shadow(0 0 25px #080a78) drop-shadow(0 15px 25px rgb(7, 4, 97));
+.Hawk-m1 {
+    filter: drop-shadow(0 0 15px var(--Hawk-m1-a)) drop-shadow(0 10px 20px var(--Hawk-m1-a));
 }
 
-.cls-1 {
-    fill: rgba(3, 6, 49, 0.751);
+.Hawk-m1:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 25px var(--Hawk-m1)) drop-shadow(0 15px 25px var(--Hawk-m1));
+}
+
+.Pig-m2 {
+    filter: drop-shadow(0 0 15px var(--Pig-m2-a)) drop-shadow(0 10px 20px var(--Pig-m2-a));
+}
+
+.Pig-m2:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 25px var(--Pig-m2)) drop-shadow(0 15px 25px var(--Pig-m2));
+}
+
+.Hawk-m1-fill {
     stroke: #b3b4c0;
-    stroke-width: 0.5px;
+    stroke-width: 0.8px;
     fill-rule: evenodd;
-    /* Applies the inner glow filter defined below */
+    filter: url(#inner-glow);
+}
+
+.Pig-m2-fill {
+    stroke: #b3b4c0;
+    stroke-width: 3.5px;
+    fill-rule: evenodd;
     filter: url(#inner-glow);
 }
