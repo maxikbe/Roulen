@@ -2,8 +2,8 @@ import React from 'react';
 
 function App() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-      
+    <div>
+      <h1>Cars</h1>
       {/* Hawk Car */}
       <svg className="Roulen-Car Hawk-m1" data-name="Roulen-Hawk-m1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360.6 111.5" style={{ width: '100%', maxWidth: '800px', height: 'auto', marginBottom: '30px' }}>
         <defs>
