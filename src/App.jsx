@@ -2,6 +2,13 @@ import React from 'react';
 
 const svgStyles = `
   <style>
+    :root {
+      --Hawk-m1: rgba(133, 228, 218, 1);
+      --Hawk-m1-a: rgba(133, 228, 218, 0.5);
+      --Pig-m2: rgba(133, 228, 218, 1);
+      --Pig-m2-a: rgba(133, 228, 218, 0.5);
+    }
+
     .Roulen-Car {
       transition: transform 0.3s ease, filter 0.3s ease;
       display: block;
@@ -9,21 +16,21 @@ const svgStyles = `
       overflow: visible !important;
     }
     
-    /* Outer Glow Filters */
+    /* Outer Glow Filters using CSS Variables */
     .Hawk-m1 {
-      filter: drop-shadow(0 0 15px rgba(133, 228, 218, 0.5)) drop-shadow(0 10px 20px rgba(133, 228, 218, 0.5));
+      filter: drop-shadow(0 0 15px var(--Hawk-m1-a)) drop-shadow(0 10px 20px var(--Hawk-m1-a));
     }
     .Hawk-m1:hover {
       transform: scale(1.02);
-      filter: drop-shadow(0 0 25px rgba(133, 228, 218, 1)) drop-shadow(0 15px 25px rgba(133, 228, 218, 1));
+      filter: drop-shadow(0 0 25px var(--Hawk-m1)) drop-shadow(0 15px 25px var(--Hawk-m1));
     }
 
     .Pig-m2 {
-      filter: drop-shadow(0 0 15px rgba(133, 228, 218, 0.5)) drop-shadow(0 10px 20px rgba(133, 228, 218, 0.5));
+      filter: drop-shadow(0 0 15px var(--Pig-m2-a)) drop-shadow(0 10px 20px var(--Pig-m2-a));
     }
     .Pig-m2:hover {
       transform: scale(1.02);
-      filter: drop-shadow(0 0 25px rgba(133, 228, 218, 1)) drop-shadow(0 15px 25px rgba(133, 228, 218, 1));
+      filter: drop-shadow(0 0 25px var(--Pig-m2)) drop-shadow(0 15px 25px var(--Pig-m2));
     }
 
     /* Path Fill & Stroke */
