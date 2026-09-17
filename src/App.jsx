@@ -1,12 +1,15 @@
 import React from 'react';
+import GradientBlinds from './GradientBlinds';
 
 const svgStyles = `
   <style>
     :root {
-      --Hawk-m1: rgba(133, 228, 218, 1);
-      --Hawk-m1-a: rgba(133, 228, 218, 0.5);
-      --Pig-m2: rgba(133, 228, 218, 1);
-      --Pig-m2-a: rgba(133, 228, 218, 0.5);
+      --Hawk-m1: rgb(52, 19, 160);
+      --Hawk-m1-a: rgba(52, 19, 160, 0.5);
+      --Hawk-m1-fill: #d7ecfe;
+      --Pig-m2: #505783;
+      --Pig-m2-a: #50578350;
+      --Car-edge: #aaafcb;
     }
 
     .Roulen-Car {
@@ -16,18 +19,36 @@ const svgStyles = `
       overflow: visible !important;
     }
     
-    /* Outer Glow Filters using CSS Variables */
     .Hawk-m1 {
+      position: absolute;
+      width: 500px;
+      top: 160vh;
+      left: 100px;
+      transform: rotateY(180deg);
       filter: drop-shadow(0 0 15px var(--Hawk-m1-a)) drop-shadow(0 10px 20px var(--Hawk-m1-a));
     }
     .Hawk-m1:hover {
       transform: scale(1.02);
+      transform: rotateY(180deg);
       filter: drop-shadow(0 0 25px var(--Hawk-m1)) drop-shadow(0 15px 25px var(--Hawk-m1));
     }
 
     .Pig-m2 {
+      position: relative;
+      width: 500px;
+      bottom: 40px;
+      left: 700px;
       filter: drop-shadow(0 0 15px var(--Pig-m2-a)) drop-shadow(0 10px 20px var(--Pig-m2-a));
     }
+
+    .Pig-m2-text {
+      color: var(--Car-edge);
+      position: absolute;
+      width: 500px;
+      top: calc(86vh + 60px);
+      right: calc(100px - 170px);
+    }
+
     .Pig-m2:hover {
       transform: scale(1.02);
       filter: drop-shadow(0 0 25px var(--Pig-m2)) drop-shadow(0 15px 25px var(--Pig-m2));
@@ -35,12 +56,19 @@ const svgStyles = `
 
     /* Path Fill & Stroke */
     .Hawk-m1-fill {
-      stroke: #b3b4c0;
+      stroke: var(--Car-edge);
       stroke-width: 0.8px;
       fill-rule: evenodd;
+      fill: black;
+      transition: 1s;
+    }
+    .Hawk-m1-fill:hover{
+      fill: var(--Hawk-m1-fill);
+      stroke: black;
+      stroke-width: 3px;
     }
     .Pig-m2-fill {
-      stroke: #b3b4c0;
+      stroke: var(--Car-edge);
       stroke-width: 3.5px;
       fill-rule: evenodd;
     }
@@ -49,7 +77,7 @@ const svgStyles = `
 
 // Hawk SVG
 const hawkSvg = `
-<svg class="Roulen-Car Hawk-m1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360.6 111.5" width="100%" height="auto">
+<svg class="Roulen-Car Hawk-m1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360.6 111.5" width="100%">
   <defs>
     ${svgStyles}
     <filter id="inner-glow-hawk" x="-50%" y="-50%" width="200%" height="200%">
@@ -65,13 +93,13 @@ const hawkSvg = `
 
 // Pig SVG
 const pigSvg = `
-<svg class="Roulen-Car Pig-m2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1585.21 430.48" width="100%" height="auto">
+<svg class="Roulen-Car Pig-m2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1585.21 430.48" width="100%">
   <defs>
     ${svgStyles}
     <filter id="inner-glow-pig" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="6" result="blur" />
       <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowDiff" />
-      <feFlood flood-color="=ú)p='#4a5bd6" flood-opacity="0" result="color" />
+      <feFlood flood-color="#4a5bd6" flood-opacity="0" result="color" />
       <feComposite in2="shadowDiff" operator="in" result="glow" />
       <feComposite in2="SourceGraphic" operator="over" />
     </filter>
@@ -80,19 +108,51 @@ const pigSvg = `
 </svg>`;
 
 export default function App() {
+  const moveDown = () => {
+    window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+  };
+
   return (
     <div>
-      <h1>Cars</h1>
-
-      <div 
-        style={{ width: '800px', maxWidth: '100%', margin: '60px 10px' }} 
-        dangerouslySetInnerHTML={{ __html: hawkSvg }} 
-      />
-
-      <div 
-        style={{ width: '800px', maxWidth: '100%', margin: '60px 10px' }} 
-        dangerouslySetInnerHTML={{ __html: pigSvg }} 
-      />
+      <div className='topPage'>
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="bg-video"
+        >
+          <source src="/videos/pig.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div 
+          onClick={moveDown}
+          style={{ width: '800px', maxWidth: '100%', cursor: 'pointer' }} 
+          dangerouslySetInnerHTML={{ __html: pigSvg }} 
+        />
+      </div>
+      <div className='carPage'>
+        <GradientBlinds
+          gradientColors={['#FF9FFC', '#5227FF']}
+          angle={20}
+          noise={0.5}
+          blindCount={16}
+          blindMinWidth={60}
+          spotlightRadius={0.5}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
+          color1="#5f36dd"
+          color2="#283668"
+        />
+        <div 
+          style={{ width: '800px', maxWidth: '100%'}} 
+          dangerouslySetInnerHTML={{ __html: hawkSvg }} 
+        />
+      </div>
     </div>
   );
 }
